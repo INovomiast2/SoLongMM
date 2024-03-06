@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Nanum Gothic Coding", monospace;
+    background-color: #121212;
+    color: white;
+}
+
+.hp-title {
+    text-align: center;
+    margin-top: 10%;
+    font-size: 3rem;
+}
+
+.hp-so-long-example {
+    text-align: center;
+    margin-top: 0%;
+    scale: 0.8;
+}
+
+.hp-auth-box {
+    text-align: center;
+    width: 100%;
+}
+
+.hp-auth-box a:nth-child(1) {
+    color: white;
+    text-decoration: none;
+    font-size: 2rem;
+    margin: 0 10px;
+    transition: 0.3s;
+    background-color: royalblue;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+
+.hp-auth-box a:hover {
+    color: #121212;
+}
+
+.hp-auth-btn {
+    margin-top: 20px;
+    width: 25rem;
+}
+
+.hp-auth-btn span img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+}
