@@ -14,7 +14,7 @@ body {
 
 .hp-title {
     text-align: center;
-    margin-top: 10%;
+    margin-top: 2%;
     font-size: 3rem;
 }
 
@@ -33,13 +33,11 @@ body {
     color: white;
     text-decoration: none;
     font-size: 2rem;
-    margin: 0 10px;
     transition: 0.3s;
     background-color: royalblue;
     padding: 10px 20px;
     border-radius: 5px;
     display: inline-block;
-    margin-top: 20px;
 }
 
 
@@ -48,7 +46,6 @@ body {
 }
 
 .hp-auth-btn {
-    margin-top: 20px;
     width: 25rem;
 }
 
@@ -59,4 +56,19 @@ body {
 .ft-logo img {
     display: inline;
     vertical-align: middle;
+}
+
+@media (max-width: 768px) {
+    .hp-title {
+        font-size: 5rem;
+    }
+    .hp-so-long-example {
+        font-size: 2rem;
+    }
+    .hp-auth-box a:nth-child(1) {
+        font-size: 3rem;
+    }
+    .hp-auth-btn {
+        width: 30rem;
+    }
 }

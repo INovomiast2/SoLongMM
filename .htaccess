@@ -1,2 +1,2 @@
 RewriteEngine On
-RewriteRule ^ /srcs/index.html [L]
+RewriteRule ^ /srcs/html/index.html [L]
