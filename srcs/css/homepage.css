@@ -44,7 +44,7 @@ body {
 
 
 .hp-auth-box a:hover {
-    color: #121212;
+    color: gold;
 }
 
 .hp-auth-btn {
@@ -52,10 +52,11 @@ body {
     width: 25rem;
 }
 
-.hp-auth-btn span img {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
-    display: flex;
-    align-items: center;
+.ft-logo {
+    display: inline;
+}
+
+.ft-logo img {
+    display: inline;
+    vertical-align: middle;
 }
