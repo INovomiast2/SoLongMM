@@ -1,16 +1,17 @@
 let isEditorLoading = true;
+const proxy_url = 'https://cors-anywhere.herokuapp.com/';
 
 setTimeout(() => {
-    Promise.all([
-        import('./map.js'),
-        import('./generate.js'),
-        import('./save.js'),
-        import('./new.js')
-      ]).then(() => {
-        isEditorLoading = false;
-        document.querySelector('.editor-loading-container').style.display = 'none';
-        document.querySelector('header').style.display = 'block';
-      });
+  Promise.all([
+    import('./map.js'),
+    import('./generate.js'),
+    import('./save.js'),
+    import('./new.js')
+  ]).then(() => {
+    isEditorLoading = false;
+    document.querySelector('.editor-loading-container').style.display = 'none';
+    document.querySelector('header').style.display = 'block';
+  });
 }, 3500);
 
 // Handling sidebar tiles
@@ -34,14 +35,14 @@ if (tiles.length === 0) {
       <form id="import-tiles-form">
         <label for="import-tiles-file">Import Tiles</label>
         <input type="file" id="import-tiles-file" accept="image/*" required>
-        <button type="submit">Import</button>
-      </form>
-      <hr style="">
-      <form id="import-tiles-form-url">
-        <label for="import-tiles-url">Import Tiles</label>
-        <input type="url" id="import-tiles-url" required>
-        <button type="submit" id="send-url">Import</button>
-    `;
+                <button type="submit">Import</button>
+              </form>
+              <hr style="">
+              <form id="import-tiles-form-url">
+                <label for="import-tiles-url">Import Tiles</label>
+                <input type="url" id="import-tiles-url" required>
+                <button type="submit" id="send-url">Import</button>
+            `;
     // Modal Style
     modal.style.width = '500px';
     modal.style.height = '550px';
@@ -95,7 +96,7 @@ if (tiles.length === 0) {
       e.preventDefault();
       const url = document.getElementById('import-tiles-url').value;
       // Fetch the image and add it to the tiles array
-      fetch(url)
+      fetch(proxy_url + url)
         .then(response => response.blob())
         .then(blob => {
           const reader = new FileReader();
@@ -114,9 +115,9 @@ if (tiles.length === 0) {
           // Add a button with a plus sign to add more tiles.
           // Check if the array has more than 0 tiles
 
-          
-              //? How to reload the tiles after adding more tiles
-              //? Maybe we can use a function to reload the tiles
+
+          //? How to reload the tiles after adding more tiles
+          //? Maybe we can use a function to reload the tiles
         });
     });
   });
@@ -137,9 +138,9 @@ function createTileElement(tilePath) {
   const uniqueId = Math.random().toString(36).substring(2, 15);
 
   const tile_contents = `
-    <img src="${tilePath}" alt="Tile" id="tile-img-${uniqueId}" class="editor-sidebar-section-tile-img" data-active="false">
-    <p class="editor-sidebar-section-tile-title">Tile Name</p>
-  `;
+            <img src="${tilePath}" alt="Tile" id="tile-img-${uniqueId}" class="editor-sidebar-section-tile-img" data-active="false">
+            <p class="editor-sidebar-section-tile-title">Tile Name</p>
+          `;
 
   const tileElement = document.createElement('div');
   tileElement.classList.add('editor-sidebar-section-tile');
@@ -175,6 +176,7 @@ if (currentProject && currentProject.name) {
 
 document.body.onload = () => {
   const tiles = JSON.parse(localStorage.getItem('currentProject')).tiles;
+  console.log("Tiles: ", tiles)
   if (tiles.length > 0) {
     // Append the button to add more tiles
     const addTileButton = document.createElement('button');
@@ -202,17 +204,17 @@ document.body.onload = () => {
       const modal = document.createElement('dialog');
       modal.id = 'modal';
       modal.innerHTML = `
-        <form id="import-tiles-form">
-          <label for="import-tiles-file">Import Tiles</label>
-          <input type="file" id="import-tiles-file" accept="image/*" required>
-          <button type="submit">Import</button>
-        </form>
-        <hr style="">
-        <form id="import-tiles-form-url">
-          <label for="import-tiles-url">Import Tiles</label>
-          <input type="url" id="import-tiles-url" required>
-          <button type="submit" id="send-url">Import</button>
-      `;
+                <form id="import-tiles-form">
+                  <label for="import-tiles-file">Import Tiles</label>
+                  <input type="file" id="import-tiles-file" accept="image/*" required>
+                  <button type="submit">Import</button>
+                </form>
+                <hr style="">
+                <form id="import-tiles-form-url">
+                  <label for="import-tiles-url">Import Tiles</label>
+                  <input type="url" id="import-tiles-url" required>
+                  <button type="submit" id="send-url">Import</button>
+              `;
       // Modal Style
       modal.style.width = '500px';
       modal.style.height = '550px';
@@ -260,13 +262,13 @@ document.body.onload = () => {
       });
       document.body.appendChild(modal);
       modal.showModal();
-  
+
       // Form Submit URL
       document.getElementById('import-tiles-form-url').addEventListener('submit', e => {
         e.preventDefault();
         const url = document.getElementById('import-tiles-url').value;
         // Fetch the image and add it to the tiles array
-        fetch(url)
+        fetch(proxy_url + url)
           .then(response => response.blob())
           .then(blob => {
             const reader = new FileReader();
@@ -274,24 +276,13 @@ document.body.onload = () => {
               tiles.push(reader.result);
               localStorage.setItem('currentProject', JSON.stringify({ ...JSON.parse(localStorage.getItem('currentProject')), tiles }));
               modal.close();
+              // Append the new tile to the sidebar
+              const tileElement = createTileElement(reader.result);
+              tileContainer.appendChild(tileElement);
             };
             reader.readAsDataURL(blob);
-            // Remove the button and append the tiles
-            tileContainer.innerHTML = '';
-            tiles.forEach(tilePath => {
-              const tileElement = createTileElement(tilePath);
-              tileContainer.appendChild(tileElement);
-            });
-            // Add a button with a plus sign to add more tiles.
-            // Check if the array has more than 0 tiles
-  
-            
-                //? How to reload the tiles after adding more tiles
-                //? Maybe we can use a function to reload the tiles
           });
-          location.reload();
-      });  
+      });
     });
-
   }
 }
