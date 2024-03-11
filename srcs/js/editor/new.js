@@ -114,5 +114,8 @@ newProject.addEventListener('click', () => {
 
         // Add the grid to the body
         document.body.appendChild(grid);
+        // Reload the page
+        // (This is a temporary solution, it will be removed in the future)
+        location.reload();
     });
 });
