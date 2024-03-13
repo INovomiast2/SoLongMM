@@ -1,5 +1,5 @@
 let isEditorLoading = true;
-const proxy_url = 'https://cors-anywhere.herokuapp.com/';
+//const proxy_url = 'https://cors-anywhere.herokuapp.com/';
 
 setTimeout(() => {
   Promise.all([
@@ -96,7 +96,7 @@ if (tiles.length === 0) {
       e.preventDefault();
       const url = document.getElementById('import-tiles-url').value;
       // Fetch the image and add it to the tiles array
-      fetch(proxy_url + url)
+      fetch(url)
         .then(response => response.blob())
         .then(blob => {
           const reader = new FileReader();
@@ -268,7 +268,7 @@ document.body.onload = () => {
         e.preventDefault();
         const url = document.getElementById('import-tiles-url').value;
         // Fetch the image and add it to the tiles array
-        fetch(proxy_url + url)
+        fetch(url)
           .then(response => response.blob())
           .then(blob => {
             const reader = new FileReader();
@@ -286,3 +286,47 @@ document.body.onload = () => {
     });
   }
 }
+
+// Add event listener on right click over tile to create a div with options
+document.querySelector('.editor-sidebar-section-tile').addEventListener('contextmenu', e => {
+  e.preventDefault();
+  let optDiv = document.getElementById('options-div');
+  // Check if theres an existant div (If so, remove it)
+  // Create the options div
+  const optionsDiv = document.createElement('div');
+  optionsDiv.id = 'options-div';
+  // Set it on the right position of the mouse
+  optionsDiv.style.position = 'absolute';
+  optionsDiv.style.top = `${e.clientY}px`;
+  optionsDiv.style.left = `${e.clientX}px`;
+  optionsDiv.style.backgroundColor = '#242424';
+  optionsDiv.style.color = 'white';
+  optionsDiv.style.borderRadius = '10px';
+  optionsDiv.style.border = '1px solid black';
+  optionsDiv.style.padding = '10px';
+  optionsDiv.style.boxShadow = '0px 0px 10px 0px black';
+  optionsDiv.style.zIndex = '1000';
+  // Create the options
+  const deleteOption = document.createElement('p');
+  deleteOption.innerHTML = 'Delete';
+  deleteOption.style.cursor = 'pointer';
+  deleteOption.style.marginBottom = '10px';
+  deleteOption.addEventListener('click', () => {
+    // Delete the tile div
+    const tile = e.target.closest('.editor-sidebar-section-tile');
+    tile.remove();
+    // Delete the tile from the tiles array
+    const tilePath = tile.src;
+    const index = tiles.indexOf(tilePath);
+    tiles.splice(index, 1);
+    // Update the tiles array in localStorage
+    localStorage.setItem('currentProject', JSON.stringify({ ...JSON.parse(localStorage.getItem('currentProject')), tiles }));
+    // Delete the options div
+    optionsDiv.remove();
+  });
+
+  // Append the options to the div
+  optionsDiv.appendChild(deleteOption);
+  // Append the div to the body
+  document.body.appendChild(optionsDiv);
+});
