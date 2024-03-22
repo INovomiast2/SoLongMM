@@ -10,8 +10,8 @@
     <header>
         <nav>
             <ul class="navbar-mini">
-                <li><a style="color: #00b0ff;" href="/user/dashboard" class="active">Home</a></li>
-                <li><a href="/user/dashboard/{{user[1]}}/myprojects">My Projects</a></li>
+                <li><a href="/user/dashboard" class="active">Home</a></li>
+                <li><a style="color: #00b0ff;" href="/user/dashboard/{{user[1]}}/myprojects">My Projects</a></li>
                 <li><a href="/user/dashboard/{{user[1]}}/settings" class="active">Settings</a></li>
                 <li class="logout-link"><a href="/user/dashboard/{{user[1]}}/logout">Logout</a></li>
             </ul>
@@ -31,14 +31,30 @@
                         <h3 style="display: flex;">Followers: <p style="padding-left: 5px;">{{user[5]}}</p></h3>
                     </div>
                     <div class="level">
-                        <h3 style="display: flex;">Level: <p style="padding-left: 5px;">{{user[5]}}</p></h3>    
+                        <h3 style="display: flex;">Level: <p style="padding-left: 5px;">{{user[6]}}</p></h3>
                     </div>
                 </div>
             </div>
         </div>
     </header>
     <main>
-        
+        <div class="projects">
+            <h1>Projects</h1>
+            {% if user|length >= 0 %}
+            <div class="new-project">
+                <p style="color: white; font-size: 50px;">+</p>
+                <p>New Project</p>
+            </div>
+            {% endif %}
+        </div>
+        <div class="recent-projects">
+            
+            
+        </div>
+        <div class="published-projects">
+
+        </div>
+
     </main>
     <footer>
 

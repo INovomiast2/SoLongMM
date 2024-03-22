@@ -16,6 +16,10 @@ setTimeout(() => {
   });
 }, 3500);
 
+if (!JSON.parse(localStorage.getItem('session'))) {
+  window.location.href = '/auth';
+}
+
 // Handling sidebar tiles
 // Get the tiles from localStorage
 let tiles = JSON.parse(localStorage.getItem('currentProject')).tiles != null ? JSON.parse(localStorage.getItem('currentProject')).tiles : [];

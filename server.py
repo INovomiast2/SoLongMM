@@ -1,35 +1,47 @@
 from flask import Flask, render_template, request, send_from_directory, redirect, url_for
 from utils import db_connect as db
 from utils import session as sess
+import os
 
 app = Flask(__name__)
 
+# Favicon Route
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory('public', 'images/so_long_map_maker_v2.png')
+
+# Home Route
 @app.route('/')
 def home():
     return render_template('./html/index.html')
 
+# Editor Route
 @app.route('/editor/')
 def editor():
     return render_template('./html/editor/index.html')
 
+# Public Route
 @app.route('/public/<path:path>')
 def public(path):
     return send_from_directory('public', path)
 
+# Auth Route
 @app.route('/auth/')
 def auth_page():
     return render_template('./html/auth/index.html')
 
+# User Logout Route
 @app.route('/user/dashboard/<username>/logout')
 def auth_logout(username):
     return render_template('./html/auth/logout.html', username=username)
 
+# User Route
 @app.route('/user/')
 def user():
     # Send to dashboard route
     return redirect(url_for('dashboard'))
     
-
+# User Dashboard Route
 @app.route('/user/dashboard/<username>')
 def dashboard(username):
     user = db.conn.execute("SELECT * FROM users WHERE username = ?", (username,)).fetchone()
@@ -40,11 +52,13 @@ def dashboard(username):
     else:
         # Send as a json and render the dashboard page
         return render_template('./html/user/dashboard/index.html', user=user)
-    
+
+# User Tools Route (Redirect)
 @app.route('/user/dashboard/')
 def redirect_dashboard():
     return render_template('./html/user/tools/redir_to_user.html')
 
+# User Profile Route
 @app.route('/user/profile/<username>')
 def profile(username):
     if username != '':
@@ -78,7 +92,8 @@ def login():
             return {'status': 'success'}
         else:
             return {'error': 'Invalid password'}
-        
+
+# This route is for the session ID generation
 @app.route('/auth/session/generate_id', methods=['POST'])
 def generate_session_id():
     data = request.get_json()
@@ -93,4 +108,24 @@ def generate_session_id():
         session_id = str(sess.generate_session_id())  # Generate session ID
         return {'session_id': session_id}
 
-app.run(debug=True, port=5500)
+# This route is going to manage the user projects
+@app.route('/user/dashboard/<username>/myprojects')
+def projects(username):
+    user = db.conn.execute("SELECT * FROM users WHERE username = ?", (username,)).fetchone()
+    
+    if user == None:
+        return {'error': 'User not found'}
+    else:
+        return render_template('./html/user/dashboard/projects/index.html', user=user)
+
+# This route is going to manage the user settings
+@app.route('/user/dashboard/<username>/settings')
+def settings(username):
+    user = db.conn.execute("SELECT * FROM users WHERE username = ?", (username,)).fetchone()
+    
+    if user == None:
+        return {'error': 'User not found'}
+    else:
+        return render_template('./html/user/dashboard/settings/index.html', user=user)
+
+app.run(debug=True, port=os.getenv('PORT'))
