@@ -31,6 +31,9 @@ newProject.addEventListener('click', () => {
     modal.style.border = '1px solid black';
     modal.style.padding = '20px';
     modal.style.boxShadow = '0px 0px 10px 0px black';
+    modal.style.zIndex = '1000';
+    modal.style.borderRadius = '10px';
+    modal.style.overflow = 'hidden';
     // Form Style
     const form = modal.querySelector('form');
     form.style.display = 'flex';
@@ -65,6 +68,10 @@ newProject.addEventListener('click', () => {
     button.style.border = 'none';
     button.style.borderRadius = '10px';
     button.style.cursor = 'pointer';
+
+    // Modal scroll-bar style
+    modal.style.overflow = 'auto';
+
     // Form Submit
     document.body.appendChild(modal);
     modal.showModal();
@@ -74,7 +81,7 @@ newProject.addEventListener('click', () => {
         const projectName = document.getElementById('project-name').value;
         const mapWidth = document.getElementById('map-width').value;
         const mapHeight = document.getElementById('map-height').value;
-        // Save the project data on a object to save it on the localStorage
+        // Save the project data on an object to save it on the localStorage
         const newProject = {
             name: projectName,
             width: mapWidth,
@@ -87,35 +94,10 @@ newProject.addEventListener('click', () => {
         // Close the modal
         modal.remove();
 
-        // Create a div with the grid to display the tiles
-        const grid = document.createElement('div');
-        grid.id = 'grid';
-        grid.style.display = 'grid';
-        grid.style.gridTemplateColumns = `repeat(${mapWidth}, 1fr)`;
-        grid.style.gridTemplateRows = `repeat(${mapHeight}, 1fr)`;
-        grid.style.width = '100%';
-        grid.style.height = '100%';
-        grid.style.position = 'absolute';
-        grid.style.top = '50%';
-        // Add buttons to add and remove tiles
-        const addTile = document.createElement('button');
-        addTile.id = 'add-tile';
-        addTile.textContent = 'Add Tile';
-        addTile.style.position = 'absolute';
-        addTile.style.top = '10px';
-        addTile.style.right = '10px';
-        addTile.style.backgroundColor = 'royalblue';
-        addTile.style.color = 'white';
-        addTile.style.border = 'none';
-        addTile.style.borderRadius = '10px';
-
-        // Change the title of page to the project name
+        // Change the title of the page to the project name
         document.title = `${projectName} - Editor - So Long MM`;
 
         // Add the grid to the body
-        document.body.appendChild(grid);
-        // Reload the page
-        // (This is a temporary solution, it will be removed in the future)
-        location.reload();
+        document.getElementById('editor-grid').appendChild(grid);
     });
 });

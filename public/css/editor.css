@@ -41,7 +41,7 @@ header {
     animation: spin 1s linear infinite;
 }
 
-.editor-container {
+.editor-content {
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -98,6 +98,10 @@ header {
     object-fit: cover;
 }
 
+#editor-grid {
+    flex-grow: 1;
+}
+
 .editor-sidebar-section-tile:hover {
     background-color: #333;
 }
@@ -151,4 +155,12 @@ header {
 
 #import-tiles-btn:hover {
     background-color: #0056b3;
+}
+
+.delete-opt-ctx-menu:hover {
+    color: royalblue;
+}
+
+.edit-opt-ctx-menu:hover {
+    color: royalblue;
 }

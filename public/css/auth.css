@@ -1,0 +1,245 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+body {
+    background-color: #101010;
+    color: white;
+}
+
+#container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#auth-presentation {
+    width: 35vw;
+    height: 100%;
+    float: left;
+    background-color: white;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#auth-presentation h1 {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+    margin-top: 2em;
+}
+
+#auth-presentation p {
+    font-size: 1em;
+    margin-bottom: 2em;
+}
+
+.copy-disc {
+    /* Put it on the bottom of the div */
+    position: absolute;
+    bottom: 0;
+    font-size: 0.8em;
+}
+
+#auth-waves {
+    rotate: -90deg;
+    margin-top: 0;
+}
+
+#auth-form {
+    width: 65vw;
+    height: 100%;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#auth-form-register {
+    width: 65vw;
+    height: 100%;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#auth-form-signin {
+    width: 30%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #000;
+    border-radius: 10px;
+    -webkit-box-shadow: 20px 17px 49px -24px rgba(0,255,81,0.65);
+    -moz-box-shadow: 20px 17px 49px -24px rgba(0,255,81,0.65);
+    box-shadow: 20px 17px 49px -24px rgba(0,255,81,0.65);
+}
+
+#auth-form-signin h2 {
+    font-size: 3.2rem;
+    margin-bottom: 1em;
+}
+
+#auth-form-signin input {
+    border: none;
+    width: 300px;
+    height: 3em;
+    margin-bottom: 2em;
+    padding: 0.5em;
+    outline: none;
+    background-color: transparent;
+    border-bottom: 2px solid white;
+    color: white;
+    font-size: larger;
+    font-family: monospace;
+    transition: all 0.1s ease-in;
+}
+
+#auth-form-signin button {
+    border: none;
+    width: 300px;
+    height: 3em;
+    margin-bottom: 2em;
+    padding: 0.5em;
+    outline: none;
+    background-color: #000;
+    border: 2px solid white;
+    color: white;
+    font-size: larger;
+    font-family: monospace;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.5s ease;
+}
+
+#auth-form-signin button:hover {
+    background-color: white;
+    color: black;
+}
+
+#auth-form-signin input:focus {
+    border-bottom: 2px solid rgb(47, 177, 47);
+}
+
+.disabled {
+    display: none;
+}
+
+#auth-form-signup {
+    width: 30%;
+    height: 50%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #000;
+    border-radius: 10px;
+    -webkit-box-shadow: 20px 17px 49px -24px rgba(0,255,81,0.65);
+    -moz-box-shadow: 20px 17px 49px -24px rgba(0,255,81,0.65);
+    box-shadow: 20px 17px 49px -24px rgba(0,255,81,0.65);
+}
+
+#auth-form-signup h2 {
+    font-size: 3.2rem;
+    margin-bottom: 1em;
+}
+
+#auth-form-signup input {
+    border: none;
+    width: 300px;
+    height: 3em;
+    margin-bottom: 2em;
+    padding: 0.5em;
+    outline: none;
+    background-color: transparent;
+    border-bottom: 2px solid white;
+    color: white;
+    font-size: larger;
+    font-family: monospace;
+    transition: all 0.1s ease-in;
+}
+
+#auth-form-signup button {
+    border: none;
+    width: 300px;
+    height: 3em;
+    margin-bottom: 2em;
+    padding: 0.5em;
+    outline: none;
+    background-color: #000;
+    border: 2px solid white;
+    color: white;
+    font-size: larger;
+    font-family: monospace;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.5s ease;
+}
+
+#auth-form-signup button:hover {
+    background-color: white;
+    color: black;
+}
+
+#auth-form-signup input:focus {
+    border-bottom: 2px solid rgb(47, 177, 47);
+}
+
+#auth-form--hidden {
+    display: none;
+}
+
+.loading-spinner {
+    display: flex;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: spin 2s linear infinite;
+    /* Loading SPinner styles */
+    border: 2px solid white;
+    border-top: 2px solid rgb(47, 177, 47)  ;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+.auth-anim--fade-in {
+    animation: fade-in 1s ease;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
