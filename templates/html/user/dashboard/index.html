@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - So Long Map Maker</title>
+    <link rel="stylesheet" href="/public/css/dash.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="navbar-mini">
+                <li><a href="/user/dashboard">Home</a></li>
+                <li><a href="/user/dashboard/{{user[1]}}/myprojects">My Projects</a></li>
+                <li><a href="/user/dashboard/{{user[1]}}/settings">Settings</a></li>
+                <li class="logout-link"><a href="/user/dashboard/{{user[1]}}/logout">Logout</a></li>
+            </ul>
+        </nav>
+        <div class="user-header">
+            <!-- Profile Image -->
+            <div class="profile-image">
+                <img src="{{user[4]}}" alt="Profile Image" width="200">
+            </div>
+        </div>
+    </header>
+    <main>
+        
+    </main>
+    <footer>
+
+    </footer>
+    <script src="/public/js/dashboard/dash.js"></script>
+</body>
+</html>

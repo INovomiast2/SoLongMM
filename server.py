@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_from_directory
+from flask import Flask, render_template, request, send_from_directory, redirect, url_for
 from utils import db_connect as db
 from utils import session as sess
 
@@ -19,6 +19,43 @@ def public(path):
 @app.route('/auth/')
 def auth_page():
     return render_template('./html/auth/index.html')
+
+@app.route('/user/dashboard/<username>/logout')
+def auth_logout(username):
+    return render_template('./html/auth/logout.html', username=username)
+
+@app.route('/user/')
+def user():
+    # Send to dashboard route
+    return redirect(url_for('dashboard'))
+    
+
+@app.route('/user/dashboard/<username>')
+def dashboard(username):
+    user = db.conn.execute("SELECT * FROM users WHERE username = ?", (username,)).fetchone()
+    
+    # We check if the user exists
+    if user == None:
+        return {'error': 'User not found'}
+    else:
+        # Send as a json and render the dashboard page
+        return render_template('./html/user/dashboard/index.html', user=user)
+    
+@app.route('/user/dashboard/')
+def redirect_dashboard():
+    return render_template('./html/user/tools/redir_to_user.html')
+
+@app.route('/user/profile/<username>')
+def profile(username):
+    if username != '':
+        # Check if the user exists
+        user = db.conn.execute("SELECT * FROM users WHERE username = ?", (username,)).fetchone()
+        if user == None:
+            return {'error': 'User not found'}
+        else:
+            # Send as a json and render the profile page
+            return render_template('./html/user/profile/index.html', user=user)
+        
 
 # This route is going to manage the login
 @app.route('/auth/login', methods=['POST'])

@@ -44,9 +44,9 @@ loginForm.addEventListener('submit', async (e) => {
                         if (data != null || data != '') {
                             console.log('Session ID:', data['session_id']);
                             // Append the session id to the local storage
-                            localStorage.setItem('sessionId', data['session_id']);
+                            localStorage.setItem('session', JSON.stringify({'id': data['session_id'], 'username': usernameInput.value}));
                             // Redirect to the dashboard
-                            window.location.href = '/dashboard';
+                            window.location.href = '/user/dashboard';
                         }
                     }
                 }).catch(err => {

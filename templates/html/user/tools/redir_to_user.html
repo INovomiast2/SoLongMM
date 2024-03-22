@@ -1,0 +1,12 @@
+<html>
+    <body>
+        <script>
+            const currentUser = JSON.parse(localStorage.getItem('session'))
+            if (currentUser && currentUser != '' || currentUser != null) {
+                window.location.href = `/user/dashboard/${currentUser.username}`
+            } else {
+                window.location.href = '/auth'
+            }
+        </script>
+    </body>
+</html>

@@ -29,3 +29,16 @@ changeForm.addEventListener('click', () => {
     registerForm.style.display = 'flex';
     registerForm.classList.add('auth-anim--fade-in');
 });
+
+// Check if the user is already logged in (Session ID)
+const sessionId = JSON.parse(localStorage.getItem('session'));
+console.log(sessionId);
+
+window.onload = () => {
+    if (sessionId != null || sessionId != undefined) {
+        // Redirect to the dashboard
+        window.location.href = `/user/dashboard/${sessionId?.username}`;
+    } else {
+        console.log('No session id found');
+    }
+}
