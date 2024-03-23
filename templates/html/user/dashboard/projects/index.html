@@ -13,7 +13,7 @@
                 <li><a href="/user/dashboard" class="active">Home</a></li>
                 <li><a style="color: #00b0ff;" href="/user/dashboard/{{user[1]}}/myprojects">My Projects</a></li>
                 <li><a href="/user/dashboard/{{user[1]}}/settings" class="active">Settings</a></li>
-                <li class="logout-link"><a href="/user/dashboard/{{user[1]}}/logout">Logout</a></li>
+                <li class="logout-link"><a id="logout-link" href="#logout">Logout</a></li>
             </ul>
         </nav>
         <div class="user-header">
@@ -38,13 +38,23 @@
         </div>
     </header>
     <main>
+        <h1 style="color:white; margin-top: 20px; margin-left: 30px;">Projects</h1>
         <div class="projects">
-            <h1>Projects</h1>
-            {% if user|length >= 0 %}
-            <div class="new-project">
+            {% if projects|length == 0 %}
+            <div class="new-project" id="new-project">
                 <p style="color: white; font-size: 50px;">+</p>
                 <p>New Project</p>
             </div>
+            {% else %}
+            <div class="new-project" id="new-project">
+                <p style="color: white; font-size: 50px;">+</p>
+                <p>New Project</p>
+            </div>
+            {% for project in projects %}
+            <div class="project" id="project-{{project[0]}}" data-id="{{project[0]}}">
+                <h2>{{project[1]}}</h2>
+            </div>
+            {% endfor %}
             {% endif %}
         </div>
         <div class="recent-projects">

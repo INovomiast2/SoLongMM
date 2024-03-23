@@ -9,19 +9,65 @@
 </head>
 <body>
 	<header>
-
+        <nav>
+            <ul class="navbar-mini">
+                <li><a style="color: #00b0ff;" href="/">Home</a></li>
+                <li><a href="/comunity">Comunity</a></li>
+                <li><a href="/about">About SoLongMM</a></li>
+				
+                <li class="logout-link"><a href="/auth">Login</a></li>
+            </ul>
+        </nav>
 	</header>
 	<main>
-		<h1 class="hp-title">So Long Map Maker - Version 1.0.0</h1>
-		<div class="hp-so-long-example">
-			<img src="https://user-images.githubusercontent.com/81205527/174392536-21619238-638a-4173-a77c-1b168c6c7898.png" alt="so_long_example_auth:augustobecker">
+		<div id="hero">
+			<div class="hero-image">
+				<img src="/public/images/so_long_map_maker_v2.png" alt="Hero Image">
+			</div>
+			<div class="hero-content">
+				<h1>So Long Map Maker</h1>
+				<p>So Long Map Maker is a free and open-source map maker for the game 42School So Long Project. Create your own maps and share them with the community!</p>
+				<a href="/auth" class="btn">Get Started</a>
+			</div>
 		</div>
-		<div class="hp-auth-box">
-			<a href="/editor/" class="hp-auth-btn">Start Creating!</a>
+		<div class="waves"><img src="/public/images/auth_wave.svg" alt=""></div>
+		<div class="explanation" id="explanations">
+			<!-- Card Styled, every card explains a feature -->
+			<div class="card">
+				<div class="card-image">
+					<img src="https://static.thenounproject.com/png/4676087-200.png" alt="Feature 1">
+				</div>
+				<div class="card-content">
+					<h2>Easy to use</h2>
+					<p>So Long Map Maker is designed to be easy to use. You can create your own maps in minutes!</p>
+				</div>
+			</div>
+			<div class="card">
+				<div class="card-image">
+					<img src="https://cdn-icons-png.flaticon.com/128/3114/3114845.png" alt="Feature 2">
+				</div>
+				<div class="card-content">
+					<h2>Share your maps</h2>
+					<p>Share your maps with the community and let them play your creations!</p>
+				</div>
+			</div>
+			<div class="card">
+				<div class="card-image">
+					<img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Feature 3" width="100">
+				</div>
+				<div class="card-content">
+					<h2>Open Source</h2>
+					<p>So Long Map Maker is open-source, you can contribute to the project on GitHub!</p>
+				</div>
+			</div>
 		</div>
+		<div class="waves" style="rotate: 180deg;"><img src="/public/images/auth_wave.svg" alt=""></div>
 	</main>
 	<footer>
-
+		<div class="footer-content">
+			<p>So Long Map Maker is a project by INovomiast2</p>
+			<p>© 2024 So Long Map Maker</p>
+		</div>
 	</footer>
 	<script src="/public/js/mainpage/main.js"></script>
 </body>

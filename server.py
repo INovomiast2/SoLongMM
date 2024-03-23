@@ -45,13 +45,14 @@ def user():
 @app.route('/user/dashboard/<username>')
 def dashboard(username):
     user = db.conn.execute("SELECT * FROM users WHERE username = ?", (username,)).fetchone()
+    project = db.conn.execute("SELECT * FROM projects WHERE author = ?", (username,)).fetchall()
     
     # We check if the user exists
     if user == None:
         return {'error': 'User not found'}
     else:
         # Send as a json and render the dashboard page
-        return render_template('./html/user/dashboard/index.html', user=user)
+        return render_template('./html/user/dashboard/index.html', user=user, project=project)
 
 # User Tools Route (Redirect)
 @app.route('/user/dashboard/')
@@ -91,7 +92,7 @@ def login():
         if password == pwd[0]:
             return {'status': 'success'}
         else:
-            return {'error': 'Invalid password'}
+            return {'error': 'invalid_password', 'status': 'failed'}
 
 # This route is for the session ID generation
 @app.route('/auth/session/generate_id', methods=['POST'])
@@ -112,11 +113,12 @@ def generate_session_id():
 @app.route('/user/dashboard/<username>/myprojects')
 def projects(username):
     user = db.conn.execute("SELECT * FROM users WHERE username = ?", (username,)).fetchone()
+    projects = db.conn.execute("SELECT * FROM projects WHERE author = ?", (username,)).fetchall()
     
     if user == None:
         return {'error': 'User not found'}
     else:
-        return render_template('./html/user/dashboard/projects/index.html', user=user)
+        return render_template('./html/user/dashboard/projects/index.html', user=user, projects=projects)
 
 # This route is going to manage the user settings
 @app.route('/user/dashboard/<username>/settings')
@@ -127,5 +129,61 @@ def settings(username):
         return {'error': 'User not found'}
     else:
         return render_template('./html/user/dashboard/settings/index.html', user=user)
+
+# New Editor Route
+@app.route('/editor/<project_id>/')
+def new_editor(project_id):
+    project = db.conn.execute("SELECT * FROM projects WHERE id = ?", (project_id,)).fetchone()
+    
+    if project == None:
+        return {'error': 'Project not found'}
+    else:
+        return render_template('./html/editor/index.html', project=project)
+    
+# Project Creation POST Route
+@app.route('/user/dashboard/<username>/create_project', methods=['POST'])
+def create_project(username):
+    try:
+        user = db.conn.execute("SELECT * FROM users WHERE username = ?", (username,)).fetchone()
+        if user == None:
+            return {'error': 'User not found'}
+        else:
+            data = request.get_json()
+            project_id = data['id']
+            project_name = data['name']
+            project_author = username
+
+            db.conn.execute("INSERT INTO projects (id, name, author) VALUES (?, ?, ?)", (project_id, project_name, project_author))
+            db.conn.commit()
+
+            return {'status': 'success'}
+    except Exception as e:
+        return {'error': str(e)}
+    
+@app.route('/comunity')
+def comunity():
+    return render_template('./html/comunity/index.html')
+
+@app.route('/comunity/<project_id>')
+def comunity_project(project_id):
+    project = db.conn.execute("SELECT * FROM projects WHERE id = ?", (project_id,)).fetchone()
+    
+    if project == None:
+        return {'error': 'Project not found'}
+    else:
+        return render_template('./html/comunity/project/index.html', project=project)
+    
+@app.route('/comunity/<project_id>/download')
+def download_project(project_id):
+    project = db.conn.execute("SELECT * FROM projects WHERE id = ?", (project_id,)).fetchone()
+    
+    if project == None:
+        return {'error': 'Project not found'}
+    else:
+        return render_template('./html/comunity/project/download.html', project=project)
+
+@app.route('/about')
+def about():
+    return render_template('./html/about/index.html')
 
 app.run(debug=True, port=os.getenv('PORT'))
