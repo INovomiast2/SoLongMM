@@ -10,7 +10,6 @@ const usernameInput = document.querySelector('input[name="username"]');
 const passwordInput = document.querySelector('input[name="password"]');
 
 loginForm.addEventListener('submit', async (e) => {
-    alert('Login form submitted');
     e.preventDefault();
     fetch(serverRoute, {
         method: 'POST',
@@ -26,7 +25,6 @@ loginForm.addEventListener('submit', async (e) => {
             const data = await res.json();
             console.info(data['status']);
             if (data['status'] === 'success') {
-                console.info('Now we genera')
                 // Fecth for the session id
                 fetch('/auth/session/generate_id', {
                     method: 'POST',

@@ -57,6 +57,6 @@ document.onclick = (e) => {
     }
     console.log(e.target.id);
     if (e.target.id === `project-${e.target.dataset.id}`) {
-        location.href = `/editor/${e.target.dataset.id}`;
+        window.location.href = `/editor/${e.target.dataset.id}`;
     }
 }

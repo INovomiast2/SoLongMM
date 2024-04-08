@@ -186,4 +186,5 @@ def download_project(project_id):
 def about():
     return render_template('./html/about/index.html')
 
-app.run(debug=True, port=os.getenv('PORT'))
+if __name__ == "__main__":
+    app.run(debug=True, port=os.getenv('PORT'))

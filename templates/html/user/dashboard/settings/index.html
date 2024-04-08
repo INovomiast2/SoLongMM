@@ -38,7 +38,39 @@
         </div>
     </header>
     <main>
-        
+        <!-- Configuration Page for the account -->
+        <h1 class="settings-h2">Settings</h1>
+        <div class="settings">
+            <div class="settings-item">
+                <h2>Change Username</h2>
+                <form action="/user/dashboard/{{user[1]}}/settings/changeusername" method="POST">
+                    <input type="text" name="newusername" placeholder="New Username">
+                    <input type="button" value="Change Username">
+                </form>
+            </div>
+            <div class="settings-item">
+                <h2>Change Password</h2>
+                <form action="/user/dashboard/{{user[1]}}/settings/changepassword" method="POST">
+                    <input type="password" name="oldpassword" placeholder="Old Password">
+                    <input type="password" name="newpassword" placeholder="New Password">
+                    <input type="password" name="confirmpassword" placeholder="Confirm Password">
+                    <input type="button" value="Change Password">
+                </form>
+            </div>
+            <div class="settings-item">
+                <h2>Change Email</h2>
+                <form action="/user/dashboard/{{user[1]}}/settings/changeemail" method="POST">
+                    <input type="email" name="newemail" placeholder="New Email" value="{{ user[2] }}">
+                    <input type="button" value="Change Email">
+                </form>
+            </div>
+            <div class="settings-item">
+                <h2>Change Profile Image</h2>
+                <form action="/user/dashboard/{{user[1]}}/settings/changeimage" method="POST" enctype="multipart/form-data">
+                    <input type="text" name="newmail" id="" placeholder="Profile picture" value="{{ user[4] }}">
+                    <input type="button" value="Change Image">
+                </form>
+            </div>
     </main>
     <footer>
 

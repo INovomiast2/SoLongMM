@@ -1,3 +1,8 @@
+<!-- 
+    So Long Map Maker Editor - v2
+
+    
+ -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,36 +13,73 @@
 </head>
 <body>
     <header>
-        <h1 class="header-editor-title">So Long Map Maker - Editor v1</h1>
-        <!-- Github Logo to repository -->
-        <div class="header-editor-options">
-            <a href="javascript:void(0)" class="header-editor-option" id="header-editor-new-prj">New Project</a>
-            <a href="javascript:void(0)" class="header-editor-option">Open Project</a>
-            <a href="javascript:void(0)" class="header-editor-option">Save Project</a>
-        </div>
-    </header>
-    <main>
-        <div class="editor-loading-container">
-            <h1 class="loading-title">So Long Map Maker - Editor v1</h1>
-            <div class="loading-spinner"></div>
-        </div>
-        <div class="editor-content">
-            <div class="editor-sidebar">
-                <div class="editor-sidebar-section">
-                    <h2 class="editor-sidebar-section-title">Tiles</h2>
-                    <div class="editor-sidebar-section-content" id="sidebar-tiles">
-                    </div>
+        <nav>
+            <div class="nav-section">
+                <h3>Project</h3>
+                <div class="dropdown">
+                    <button id="new-map">Save map...</button>
+                    <button id="save-map">Save map on cloud...</button>
+                    <button id="load-map">Load map...</button>
+                    <button id="export-map">Load map from cloud...</button>
+                    <div class="separator"></div>
+                    <button id="export-map">Export map...</button>
+                    <button id="export-map">Import map...</button>
+
                 </div>
             </div>
-            <div id="editor-grid">
-                <h1>Hola Mundo</h1>
+            <div class="nav-section">
+                <h3>Tools</h3>
+                <div class="dropdown">
+                    <button id="draw-tool">Draw Tool</button>
+                    <button id="erase-tool">Erease Tool</button>
+                    <button id="fill-tool">Fill Tool</button>
+                    <button id="select-tool">Select Tool</button>
+                    <button id="set-player-pos">Set Initial Player Position</button>
+                </div>
             </div>
+            <div class="nav-section">
+                <h3>View</h3>
+                <div class="dropdown">
+                    <button id="tile-sidebar">Tilebar</button>
+                    <button id="grid">Grid</button>
+                    <button id="zoom-in">Zoom In</button>
+                    <button id="zoom-out">Zoom Out</button>
+
+                </div>
+            </div>
+            <div class="nav-section">
+                <h3>Dev Tools</h3>
+                <div class="dropdown">
+                    <button id="open-code-editor">Edit game.js</button>
+                    <button id="debug-mode">Activate Debug Mode</button>
+
+                </div>
+            </div>
+            <!-- This is going to be the green test button -->
+            <button id="test-button">
+                <span>Test</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M3 22V2l18 10-18 10z" fill="#04AA6D"/>
+                </svg>
+            </button>
+        </nav>
+    </header>
+    <main>
+        <div class="loading-screen" id="loading-screen">
+            <div class="loader"></div>
+            <p>Loading <span class="rainbow-text" id="project-id">{{ project[0] }}</span></p>
+        </div>
+        <div class="container">
+            <div class="editor"></div>
         </div>
     </main>
     <footer>
-
+        <div class="footer">
+            <p>So Long Map Maker - v2</p>
+            <p>Made with <span style="color: rgb(250, 46, 23);"><3</span> by INovomiast2</p>
+        </div>
     </footer>
     <script src="/public/js/editor/main.js"></script>
 </body>
 </html>
-

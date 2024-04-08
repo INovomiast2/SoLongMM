@@ -1,0 +1,76 @@
+.loader {
+    width: 50px;
+    aspect-ratio: 1.154;
+    position: relative;
+    background: conic-gradient(from 120deg at 50% 64%,
+            #0f0f0f,
+            #ffffff 1deg 120deg,
+            #0000 121deg);
+    animation: l27-0 1.5s infinite cubic-bezier(0.3, 1, 0, 1);
+}
+
+.loader:before,
+.loader:after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: inherit;
+    transform-origin: 50% 66%;
+    animation: l27-1 1.5s infinite;
+}
+
+.loader:after {
+    --s: -1;
+}
+
+@keyframes l27-0 {
+
+    0%,
+    30% {
+        transform: rotate(0);
+    }
+
+    70% {
+        transform: rotate(120deg);
+    }
+
+    70.01%,
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes l27-1 {
+    0% {
+        transform: rotate(calc(var(--s, 1) * 120deg)) translate(0);
+    }
+
+    30%,
+    70% {
+        transform: rotate(calc(var(--s, 1) * 120deg)) translate(calc(var(--s, 1) * -5px), 10px);
+    }
+
+    100% {
+        transform: rotate(calc(var(--s, 1) * 120deg)) translate(0);
+    }
+}
+
+/* Rainbow Text */
+
+.rainbow-text {
+    background-image: linear-gradient(90deg, #ff0000, #ff7700, #ffdd00, #aaff00, #00ff00, #00ff77, #00ffdd, #00aaff, #0000ff, #7700ff, #dd00ff, #ff00aa, #ff0000);
+    background-size: 2000%;
+    color: transparent;
+    background-clip: text;
+    animation: rainbow 200s linear infinite;
+}
+
+@keyframes rainbow {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 2000% 0;
+    }
+}
